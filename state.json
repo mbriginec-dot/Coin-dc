@@ -6,7 +6,7 @@
     },
     "65002.0650": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "ETH/USDC": {},
@@ -14,7 +14,7 @@
   "XRP/USDC": {
     "1.1181": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "DOGE/USDC": {},
@@ -43,20 +43,20 @@
   "ICP/USDC": {
     "2.1740": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "ARB/USDC": {},
   "XLM/USDC": {
     "0.1811": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "XLM/USD": {
     "0.1811": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   }
 }
