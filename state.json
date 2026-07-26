@@ -32,6 +32,10 @@
   "UNI/USDC": {
     "3.6910": {
       "alerted": true,
+      "moved_away": true
+    },
+    "3.7620": {
+      "alerted": true,
       "moved_away": false
     }
   },
@@ -47,7 +51,12 @@
     }
   },
   "NEAR/USDC": {},
-  "APT/USDC": {},
+  "APT/USDC": {
+    "0.6323": {
+      "alerted": true,
+      "moved_away": false
+    }
+  },
   "FIL/USDC": {},
   "ICP/USDC": {
     "2.1740": {
