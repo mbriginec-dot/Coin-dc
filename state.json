@@ -68,13 +68,13 @@
   "XLM/USDC": {
     "0.1811": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "XLM/USD": {
     "0.1811": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   }
 }
