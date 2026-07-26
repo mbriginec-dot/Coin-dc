@@ -20,7 +20,12 @@
   "DOGE/USDC": {},
   "ADA/USDC": {},
   "AVAX/USDC": {},
-  "LINK/USDC": {},
+  "LINK/USDC": {
+    "8.6900": {
+      "alerted": true,
+      "moved_away": false
+    }
+  },
   "DOT/USDC": {},
   "LTC/USDC": {
     "46.0500": {
@@ -47,7 +52,7 @@
     },
     "6.9350": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "NEAR/USDC": {},
