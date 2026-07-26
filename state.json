@@ -6,7 +6,7 @@
     },
     "65002.0650": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "ETH/USDC": {},
@@ -25,7 +25,7 @@
   "LTC/USDC": {
     "46.0500": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "SHIB/USDC": {},
@@ -36,14 +36,19 @@
     }
   },
   "ATOM/USDC": {},
-  "ETC/USDC": {},
+  "ETC/USDC": {
+    "6.8133": {
+      "alerted": true,
+      "moved_away": false
+    }
+  },
   "NEAR/USDC": {},
   "APT/USDC": {},
   "FIL/USDC": {},
   "ICP/USDC": {
     "2.1740": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "ARB/USDC": {},
