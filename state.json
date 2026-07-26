@@ -40,6 +40,10 @@
     "6.8133": {
       "alerted": true,
       "moved_away": false
+    },
+    "6.9350": {
+      "alerted": true,
+      "moved_away": false
     }
   },
   "NEAR/USDC": {},
