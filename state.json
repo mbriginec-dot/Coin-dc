@@ -43,7 +43,7 @@
     },
     "6.9350": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "NEAR/USDC": {},
