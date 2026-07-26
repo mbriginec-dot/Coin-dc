@@ -23,7 +23,7 @@
   "LINK/USDC": {
     "8.6900": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "DOT/USDC": {},
