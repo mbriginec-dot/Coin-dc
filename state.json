@@ -6,7 +6,7 @@
     },
     "65002.0650": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "ETH/USDC": {},
@@ -39,11 +39,11 @@
   "ETC/USDC": {
     "6.8133": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     },
     "6.9350": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "NEAR/USDC": {},
