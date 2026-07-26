@@ -23,7 +23,7 @@
   "LINK/USDC": {
     "8.6900": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "DOT/USDC": {},
@@ -73,13 +73,13 @@
   "XLM/USDC": {
     "0.1811": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "XLM/USD": {
     "0.1811": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   }
 }
