@@ -36,7 +36,7 @@
   "LINK/USDC": {
     "8.6900": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "DOT/USDC": {},
@@ -79,7 +79,7 @@
   "ICP/USDC": {
     "2.1740": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "ARB/USDC": {},
