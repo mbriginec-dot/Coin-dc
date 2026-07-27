@@ -59,7 +59,7 @@
     },
     "3.7620": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "ATOM/USDC": {},
