@@ -10,7 +10,7 @@
     },
     "65556.4450": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     },
     "65640.0333": {
       "alerted": true,
@@ -48,7 +48,7 @@
   "LTC/USDC": {
     "46.0500": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "SHIB/USDC": {},
@@ -89,7 +89,7 @@
   "ICP/USDC": {
     "2.1740": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "ARB/USDC": {},
