@@ -2,7 +2,7 @@
   "BTC/USDC": {
     "64664.1350": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     },
     "65002.0650": {
       "alerted": true,
