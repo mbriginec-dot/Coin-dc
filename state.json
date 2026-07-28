@@ -68,11 +68,11 @@
   "UNI/USDC": {
     "3.6910": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     },
     "3.7620": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "ATOM/USDC": {},
