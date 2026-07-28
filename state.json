@@ -32,12 +32,16 @@
     "1.1181": {
       "alerted": true,
       "moved_away": true
+    },
+    "1.0512": {
+      "alerted": true,
+      "moved_away": false
     }
   },
   "DOGE/USDC": {
     "0.0709": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "ADA/USDC": {},
@@ -94,7 +98,12 @@
       "moved_away": false
     }
   },
-  "FIL/USDC": {},
+  "FIL/USDC": {
+    "0.7010": {
+      "alerted": true,
+      "moved_away": false
+    }
+  },
   "ICP/USDC": {
     "2.1740": {
       "alerted": true,
