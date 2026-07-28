@@ -25,7 +25,7 @@
     },
     "73.3450": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "XRP/USDC": {
@@ -35,7 +35,7 @@
     },
     "1.0512": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "DOGE/USDC": {
@@ -99,7 +99,7 @@
     },
     "0.5788": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "FIL/USDC": {
