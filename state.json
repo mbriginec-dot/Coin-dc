@@ -61,7 +61,7 @@
   "LTC/USDC": {
     "46.0500": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "SHIB/USDC": {},
@@ -99,7 +99,7 @@
     },
     "0.5788": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "FIL/USDC": {
