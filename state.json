@@ -2,7 +2,7 @@
   "BTC/USDC": {
     "64664.1350": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     },
     "65002.0650": {
       "alerted": true,
@@ -41,7 +41,7 @@
   "DOGE/USDC": {
     "0.0709": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "ADA/USDC": {},
