@@ -6,7 +6,7 @@
     },
     "65002.0650": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     },
     "65556.4450": {
       "alerted": true,
@@ -99,13 +99,13 @@
     },
     "0.5788": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "FIL/USDC": {
     "0.7010": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "ICP/USDC": {
