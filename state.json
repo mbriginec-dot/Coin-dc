@@ -99,7 +99,7 @@
     },
     "0.5788": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "FIL/USDC": {
