@@ -2,11 +2,11 @@
   "BTC/USDC": {
     "64664.1350": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     },
     "65002.0650": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     },
     "65556.4450": {
       "alerted": true,
@@ -72,7 +72,7 @@
     },
     "3.7620": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "ATOM/USDC": {},
@@ -99,13 +99,13 @@
     },
     "0.5788": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "FIL/USDC": {
     "0.7010": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "ICP/USDC": {
