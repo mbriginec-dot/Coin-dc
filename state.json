@@ -2,7 +2,7 @@
   "BTC/USDC": {
     "64664.1350": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     },
     "65002.0650": {
       "alerted": true,
@@ -112,6 +112,10 @@
     "2.1740": {
       "alerted": true,
       "moved_away": true
+    },
+    "2.0450": {
+      "alerted": true,
+      "moved_away": false
     }
   },
   "ARB/USDC": {},
