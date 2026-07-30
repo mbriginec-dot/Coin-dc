@@ -41,7 +41,7 @@
   "DOGE/USDC": {
     "0.0709": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "ADA/USDC": {},
@@ -79,7 +79,7 @@
   "ETC/USDC": {
     "6.8133": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     },
     "6.9350": {
       "alerted": true,
