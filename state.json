@@ -2,7 +2,7 @@
   "BTC/USDC": {
     "64664.1350": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     },
     "65002.0650": {
       "alerted": true,
@@ -41,14 +41,14 @@
   "DOGE/USDC": {
     "0.0709": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "ADA/USDC": {},
   "AVAX/USDC": {
     "6.3750": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "LINK/USDC": {
@@ -79,7 +79,7 @@
   "ETC/USDC": {
     "6.8133": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     },
     "6.9350": {
       "alerted": true,
@@ -115,7 +115,7 @@
     },
     "2.0450": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "ARB/USDC": {},
