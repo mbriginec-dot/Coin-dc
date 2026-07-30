@@ -6,7 +6,7 @@
     },
     "65002.0650": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     },
     "65556.4450": {
       "alerted": true,
@@ -48,7 +48,7 @@
   "AVAX/USDC": {
     "6.3750": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "LINK/USDC": {
