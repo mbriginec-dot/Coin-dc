@@ -99,13 +99,13 @@
     },
     "0.5788": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "FIL/USDC": {
     "0.7010": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "ICP/USDC": {
@@ -115,7 +115,7 @@
     },
     "2.0450": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "ARB/USDC": {},
