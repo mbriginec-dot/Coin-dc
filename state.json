@@ -105,7 +105,7 @@
   "FIL/USDC": {
     "0.7010": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "ICP/USDC": {
