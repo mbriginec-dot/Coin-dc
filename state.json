@@ -48,13 +48,17 @@
   "AVAX/USDC": {
     "6.3750": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "LINK/USDC": {
     "8.6900": {
       "alerted": true,
       "moved_away": true
+    },
+    "8.1345": {
+      "alerted": true,
+      "moved_away": false
     }
   },
   "DOT/USDC": {},
