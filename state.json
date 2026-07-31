@@ -6,7 +6,7 @@
     },
     "65002.0650": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     },
     "65556.4450": {
       "alerted": true,
@@ -41,7 +41,7 @@
   "DOGE/USDC": {
     "0.0709": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "ADA/USDC": {},
@@ -61,7 +61,7 @@
   "LTC/USDC": {
     "46.0500": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "SHIB/USDC": {},
@@ -79,7 +79,7 @@
   "ETC/USDC": {
     "6.8133": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     },
     "6.9350": {
       "alerted": true,
