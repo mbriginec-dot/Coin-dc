@@ -35,7 +35,7 @@
     },
     "1.0512": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "DOGE/USDC": {
@@ -119,7 +119,7 @@
     },
     "2.0450": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "ARB/USDC": {},
