@@ -25,7 +25,7 @@
     },
     "73.3450": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "XRP/USDC": {
@@ -48,7 +48,7 @@
   "AVAX/USDC": {
     "6.3750": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "LINK/USDC": {
