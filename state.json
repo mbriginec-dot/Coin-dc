@@ -123,7 +123,7 @@
     },
     "2.0450": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "ARB/USDC": {},
