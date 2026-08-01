@@ -49,6 +49,10 @@
     "6.3750": {
       "alerted": true,
       "moved_away": false
+    },
+    "6.3000": {
+      "alerted": true,
+      "moved_away": false
     }
   },
   "LINK/USDC": {
