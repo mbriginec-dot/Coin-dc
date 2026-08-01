@@ -35,7 +35,7 @@
     },
     "1.0512": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "DOGE/USDC": {
@@ -48,7 +48,7 @@
   "AVAX/USDC": {
     "6.3750": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "LINK/USDC": {
