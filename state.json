@@ -35,7 +35,7 @@
     },
     "1.0512": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "DOGE/USDC": {
