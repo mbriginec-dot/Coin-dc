@@ -25,7 +25,7 @@
     },
     "73.3450": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "XRP/USDC": {
@@ -35,7 +35,7 @@
     },
     "1.0512": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "DOGE/USDC": {
@@ -48,7 +48,7 @@
   "AVAX/USDC": {
     "6.3750": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     },
     "6.3000": {
       "alerted": true,
@@ -62,7 +62,7 @@
     },
     "8.1345": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "DOT/USDC": {},
@@ -113,7 +113,7 @@
   "FIL/USDC": {
     "0.7010": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "ICP/USDC": {
