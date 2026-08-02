@@ -41,7 +41,7 @@
   "DOGE/USDC": {
     "0.0709": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "ADA/USDC": {},
