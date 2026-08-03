@@ -1,0 +1,74 @@
+name: Сканування сигналів (кожні 5 хв)
+
+# Запускає один прохід сканування (main.py --once) за розкладом і надсилає
+# сигнали в Telegram. Стан дедублікації (data/state.json) зберігається між
+# запусками через actions/cache, оскільки кожен запуск GitHub Actions
+# відбувається в чистому одноразовому контейнері.
+#
+# ОБОВ'ЯЗКОВО перед першим запуском: Settings -> Secrets and variables ->
+# Actions -> New repository secret -> додати TELEGRAM_BOT_TOKEN і TELEGRAM_CHAT_ID.
+#
+# ВАЖЛИВІ ОБМЕЖЕННЯ (див. README.md, розділ "Запуск через GitHub Actions"):
+#   - розклад cron у GitHub Actions НЕ гарантує точність до хвилини — під
+#     високим навантаженням на боці GitHub запуск може відкладатись;
+#   - для приватного репозиторію є ліміт безкоштовних хвилин Actions на
+#     місяць (безлімітно тільки для публічних репозиторіїв) — сканування
+#     кожні 5 хв може вичерпати ліміт приватного репо за кілька днів;
+#   - GitHub автоматично вимикає заплановані workflow, якщо в репозиторії
+#     немає жодного коміту 60+ днів.
+
+"on":
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch: {}   # кнопка "Run workflow" для ручного запуску/перевірки
+
+concurrency:
+  group: signal-scan
+  cancel-in-progress: true   # якщо попередній прохід ще виконується, коли настав час нового — новий скасовує старий
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout репозиторію
+        uses: actions/checkout@v4
+
+      - name: Встановити Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Встановити залежності
+        run: pip install -r requirements.txt
+
+      - name: Відновити стан дедублікації сповіщень
+        uses: actions/cache/restore@v4
+        with:
+          path: data/state.json
+          key: bot-state-${{ github.run_id }}
+          restore-keys: |
+            bot-state-
+
+      - name: Один прохід сканування
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python main.py --once
+
+      - name: Зберегти стан дедублікації сповіщень
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: data/state.json
+          key: bot-state-${{ github.run_id }}
+
+      - name: Завантажити лог як артефакт (для діагностики)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bot-log-${{ github.run_id }}
+          path: data/bot.log
+          retention-days: 3
+          if-no-files-found: ignore
