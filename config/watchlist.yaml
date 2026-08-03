@@ -1,0 +1,198 @@
+# =============================================================================
+# СПИСОК ІНСТРУМЕНТІВ ДЛЯ СКАНУВАННЯ
+#
+# provider:
+#   - "yfinance"  — акції, ф'ючерси, форекс (безкоштовно, без ключа, "майже реальний час")
+#   - "coinbase"  — криптовалюта (безкоштовно, без ключа, справжній реальний час)
+#   - "alpaca"    — акції (потрібен безкоштовний ключ, справжній реальний час, розділ README)
+#   - "twelvedata"— форекс/акції (потрібен безкоштовний ключ, ліміт запитів)
+#
+# point_value — розмір "пункту" в $ (розділ 3.3 Стратегії 2):
+#   акції: 0.01 (цент) · форекс: 0.0001 (0.01 для пар з єною) · ф'ючерси: розмір тіку контракту
+#   крипто: приблизна величина залежно від порядку ціни монети (див. коментар у розділі crypto)
+#
+# enabled_strategies — список strategy_id, якщо потрібно обмежити стратегії для
+# конкретного інструмента; якщо не вказано — застосовуються всі 8.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# STOCKS — критерій: ціна $20-60, середній обсяг від 500 000 акцій/день
+#
+# ⚠️ ЧЕСНО: перевірено пошуком ~20 конкретних тикерів (банки, авіалінії,
+# енергетика, ритейл, телеком) станом на сьогодні. Через незвично сильне
+# зростання ринку зараз більшість "класичних" $20-60 акцій вилетіли З
+# ДІАПАЗОНУ — або значно ВИЩЕ (банки: BAC ~$62, WFC ~$86, C ~$132, DAL ~$70,
+# UAL ~$95), або значно НИЖЧЕ (F ~$16, SOFI ~$17, AAL ~$12, NU ~$13).
+# Впевнено підтверджено в діапазоні лише 4 позиції нижче.
+#
+# Це НЕ помилка процесу, а сигнал, що статичний список для $20-60 застаріває
+# за лічені дні при такій волатильності — правильне довгострокове рішення:
+# скрипт-скринер на yfinance, що перераховує список щодня локально у вас
+# (можу додати окремим файлом за запитом). Поки що — 4 перевірених тикери;
+# решту місця можна заповнити самостійно або дочекатись скринера.
+# -----------------------------------------------------------------------------
+stocks:
+  - symbol: "CMCSA"
+    display_name: "Comcast Corp. (CMCSA)"
+    asset_class: stock
+    provider: yfinance
+    point_value: 0.01
+
+  - symbol: "LUV"
+    display_name: "Southwest Airlines Co. (LUV)"
+    asset_class: stock
+    provider: yfinance
+    point_value: 0.01
+
+  - symbol: "OXY"
+    display_name: "Occidental Petroleum Corp. (OXY)"
+    asset_class: stock
+    provider: yfinance
+    point_value: 0.01
+
+  - symbol: "CCL"
+    display_name: "Carnival Corp. (CCL)"
+    asset_class: stock
+    provider: yfinance
+    point_value: 0.01
+
+futures:
+  - symbol: "ES=F"
+    display_name: "E-mini S&P 500 (/ES)"
+    asset_class: futures
+    provider: yfinance
+    point_value: 0.25       # мінімальний тік /ES = 0.25 пункту = $12.50
+
+  - symbol: "NQ=F"
+    display_name: "E-mini Nasdaq-100 (/NQ)"
+    asset_class: futures
+    provider: yfinance
+    point_value: 0.25
+
+  - symbol: "GC=F"
+    display_name: "Золото (/GC)"
+    asset_class: futures
+    provider: yfinance
+    point_value: 0.10
+
+  - symbol: "CL=F"
+    display_name: "Нафта WTI (/CL)"
+    asset_class: futures
+    provider: yfinance
+    point_value: 0.01
+
+# -----------------------------------------------------------------------------
+# CRYPTO — топ-50 за ринковою капіталізацією (без стейблкоїнів USDT/USDC/DAI/...
+# і без wrapped/staked похідних BTC/ETH — вони технічно рухаються 1:1 з
+# базовим активом, тому дублюють, а не додають торгових можливостей).
+#
+# provider: coinbase — публічний REST API Coinbase Exchange, без ключа.
+# Ранги 1-21 звірено напряму через live-дані CoinGecko сьогодні; ранги 22-50 —
+# з високою впевненістю за загальновідомою стабільною приналежністю до топ-50
+# (без live-звірки кожного — за потреби можу звірити окремим проходом).
+# point_value підібраний під порядок ціни монети — орієнтовний, коригуйте
+# за потреби, суттєво на розрахунки не впливає (домінує ATR-стоп).
+#
+# Коли повернемось на Binance/Bybit: змінити provider на "binance"/"bybit" і
+# symbol на їхній формат (напр. "BTCUSDT" замість "BTC-USD"), після реалізації
+# відповідного провайдера в bot/data/ — решта конфігурації не зміниться.
+# -----------------------------------------------------------------------------
+crypto:
+  - { symbol: "BTC-USD",  display_name: "Bitcoin (BTC)",              asset_class: crypto, provider: coinbase, point_value: 1.0 }
+  - { symbol: "ETH-USD",  display_name: "Ethereum (ETH)",             asset_class: crypto, provider: coinbase, point_value: 0.1 }
+  - { symbol: "BNB-USD",  display_name: "BNB (BNB)",                  asset_class: crypto, provider: coinbase, point_value: 0.1 }
+  - { symbol: "XRP-USD",  display_name: "XRP (XRP)",                  asset_class: crypto, provider: coinbase, point_value: 0.001 }
+  - { symbol: "SOL-USD",  display_name: "Solana (SOL)",                asset_class: crypto, provider: coinbase, point_value: 0.01 }
+  - { symbol: "TRX-USD",  display_name: "TRON (TRX)",                  asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+  - { symbol: "HYPE-USD", display_name: "Hyperliquid (HYPE)",          asset_class: crypto, provider: coinbase, point_value: 0.01 }
+  - { symbol: "DOGE-USD", display_name: "Dogecoin (DOGE)",             asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+  - { symbol: "ADA-USD",  display_name: "Cardano (ADA)",                asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+  - { symbol: "LINK-USD", display_name: "Chainlink (LINK)",            asset_class: crypto, provider: coinbase, point_value: 0.001 }
+  - { symbol: "XLM-USD",  display_name: "Stellar (XLM)",                asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+  - { symbol: "BCH-USD",  display_name: "Bitcoin Cash (BCH)",           asset_class: crypto, provider: coinbase, point_value: 0.1 }
+  - { symbol: "LTC-USD",  display_name: "Litecoin (LTC)",               asset_class: crypto, provider: coinbase, point_value: 0.01 }
+  - { symbol: "HBAR-USD", display_name: "Hedera (HBAR)",                asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+  - { symbol: "SHIB-USD", display_name: "Shiba Inu (SHIB)",             asset_class: crypto, provider: coinbase, point_value: 0.0000001 }
+  - { symbol: "SUI-USD",  display_name: "Sui (SUI)",                    asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+  - { symbol: "AVAX-USD", display_name: "Avalanche (AVAX)",             asset_class: crypto, provider: coinbase, point_value: 0.001 }
+  - { symbol: "CRO-USD",  display_name: "Cronos (CRO)",                 asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+  - { symbol: "UNI-USD",  display_name: "Uniswap (UNI)",                asset_class: crypto, provider: coinbase, point_value: 0.001 }
+  - { symbol: "NEAR-USD", display_name: "NEAR Protocol (NEAR)",         asset_class: crypto, provider: coinbase, point_value: 0.001 }
+  - { symbol: "ZEC-USD",  display_name: "Zcash (ZEC)",                  asset_class: crypto, provider: coinbase, point_value: 0.1 }
+  - { symbol: "DOT-USD",  display_name: "Polkadot (DOT)",               asset_class: crypto, provider: coinbase, point_value: 0.001 }
+  - { symbol: "POL-USD",  display_name: "Polygon (POL)",                asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+  - { symbol: "ICP-USD",  display_name: "Internet Computer (ICP)",      asset_class: crypto, provider: coinbase, point_value: 0.001 }
+  - { symbol: "APT-USD",  display_name: "Aptos (APT)",                  asset_class: crypto, provider: coinbase, point_value: 0.001 }
+  - { symbol: "ETC-USD",  display_name: "Ethereum Classic (ETC)",       asset_class: crypto, provider: coinbase, point_value: 0.01 }
+  - { symbol: "FIL-USD",  display_name: "Filecoin (FIL)",               asset_class: crypto, provider: coinbase, point_value: 0.001 }
+  - { symbol: "ATOM-USD", display_name: "Cosmos (ATOM)",                asset_class: crypto, provider: coinbase, point_value: 0.001 }
+  - { symbol: "ARB-USD",  display_name: "Arbitrum (ARB)",               asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+  - { symbol: "OP-USD",   display_name: "Optimism (OP)",                asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+  - { symbol: "INJ-USD",  display_name: "Injective (INJ)",              asset_class: crypto, provider: coinbase, point_value: 0.01 }
+  - { symbol: "TIA-USD",  display_name: "Celestia (TIA)",               asset_class: crypto, provider: coinbase, point_value: 0.001 }
+  - { symbol: "SEI-USD",  display_name: "Sei (SEI)",                    asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+  - { symbol: "PEPE-USD", display_name: "Pepe (PEPE)",                  asset_class: crypto, provider: coinbase, point_value: 0.00000001 }
+  - { symbol: "WIF-USD",  display_name: "dogwifhat (WIF)",              asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+  - { symbol: "BONK-USD", display_name: "Bonk (BONK)",                  asset_class: crypto, provider: coinbase, point_value: 0.00000001 }
+  - { symbol: "ALGO-USD", display_name: "Algorand (ALGO)",              asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+  - { symbol: "VET-USD",  display_name: "VeChain (VET)",                asset_class: crypto, provider: coinbase, point_value: 0.00001 }
+  - { symbol: "MKR-USD",  display_name: "Sky / Maker (MKR)",            asset_class: crypto, provider: coinbase, point_value: 1.0 }
+  - { symbol: "AAVE-USD", display_name: "Aave (AAVE)",                  asset_class: crypto, provider: coinbase, point_value: 0.1 }
+  - { symbol: "GRT-USD",  display_name: "The Graph (GRT)",              asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+  - { symbol: "IMX-USD",  display_name: "Immutable (IMX)",              asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+  - { symbol: "TAO-USD",  display_name: "Bittensor (TAO)",              asset_class: crypto, provider: coinbase, point_value: 0.1 }
+  - { symbol: "ONDO-USD", display_name: "Ondo (ONDO)",                  asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+  - { symbol: "WLD-USD",  display_name: "Worldcoin (WLD)",              asset_class: crypto, provider: coinbase, point_value: 0.001 }
+  - { symbol: "JUP-USD",  display_name: "Jupiter (JUP)",                asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+  - { symbol: "STX-USD",  display_name: "Stacks (STX)",                 asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+  - { symbol: "CRV-USD",  display_name: "Curve DAO (CRV)",              asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+  - { symbol: "FET-USD",  display_name: "Fetch.ai / ASI (FET)",         asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+  - { symbol: "LDO-USD",  display_name: "Lido DAO (LDO)",               asset_class: crypto, provider: coinbase, point_value: 0.0001 }
+
+# -----------------------------------------------------------------------------
+# FOREX — лише мажорні пари (USD проти 6 інших головних валют: EUR, JPY, GBP,
+# CHF, CAD, AUD, NZD). Це стабільний, загальновідомий список — саме мажори
+# мають найвищу ліквідність і, відповідно, найменший спред серед усіх пар.
+# -----------------------------------------------------------------------------
+forex:
+  - symbol: "EURUSD=X"
+    display_name: "EUR/USD"
+    asset_class: forex
+    provider: yfinance
+    point_value: 0.0001
+
+  - symbol: "USDJPY=X"
+    display_name: "USD/JPY"
+    asset_class: forex
+    provider: yfinance
+    point_value: 0.01
+
+  - symbol: "GBPUSD=X"
+    display_name: "GBP/USD"
+    asset_class: forex
+    provider: yfinance
+    point_value: 0.0001
+
+  - symbol: "USDCHF=X"
+    display_name: "USD/CHF"
+    asset_class: forex
+    provider: yfinance
+    point_value: 0.0001
+
+  - symbol: "USDCAD=X"
+    display_name: "USD/CAD"
+    asset_class: forex
+    provider: yfinance
+    point_value: 0.0001
+
+  - symbol: "AUDUSD=X"
+    display_name: "AUD/USD"
+    asset_class: forex
+    provider: yfinance
+    point_value: 0.0001
+
+  - symbol: "NZDUSD=X"
+    display_name: "NZD/USD"
+    asset_class: forex
+    provider: yfinance
+    point_value: 0.0001
