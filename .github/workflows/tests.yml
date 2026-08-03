@@ -1,0 +1,38 @@
+name: Тести
+
+# Запускає весь тестовий набір (формули калькулятора, сила рівня/Value Area,
+# інтеграційний smoke-тест) при кожному push/PR у main — щоб випадкові зміни
+# в стратегіях не зламали формули, звірені з вашими документами.
+
+"on":
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout репозиторію
+        uses: actions/checkout@v4
+
+      - name: Встановити Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Встановити залежності
+        run: pip install -r requirements.txt
+
+      - name: Юніт-тести — формули калькулятора (проти прикладів з .docx)
+        run: python tests/test_risk_calculator.py
+
+      - name: Юніт-тести — сила рівня, Value Area, тижневі бари
+        run: python tests/test_levels_and_strength.py
+
+      - name: Інтеграційний smoke-тест (весь конвеєр, без мережі)
+        run: python tests/test_engine_smoke.py
