@@ -34,7 +34,7 @@ jobs:
           if [ -z "${{ secrets.TELEGRAM_BOT_TOKEN }}" ]; then
             echo "::error::TELEGRAM_BOT_TOKEN НЕ заданий у Settings -> Secrets and variables -> Actions"
           else
-            echo "TELEGRAM_BOT_TOKEN заданий (довжина: ${#TOKEN_CHECK} символів приховано)"
+            echo "TELEGRAM_BOT_TOKEN заданий"
           fi
           if [ -z "${{ secrets.TELEGRAM_CHAT_ID }}" ]; then
             echo "::error::TELEGRAM_CHAT_ID НЕ заданий у Settings -> Secrets and variables -> Actions"
@@ -47,3 +47,12 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python main.py --test-telegram
+
+      - name: "!!! РЕЗУЛЬТАТ ТЕСТУ !!! (дивіться сюди)"
+        if: always()
+        run: |
+          echo "===================================================="
+          echo "ВМІСТ data/bot.log (повний лог запуску):"
+          echo "===================================================="
+          cat data/bot.log || echo "Файл data/bot.log не знайдено"
+          echo "===================================================="
