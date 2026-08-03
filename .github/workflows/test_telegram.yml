@@ -1,0 +1,49 @@
+name: Тест Telegram (діагностика)
+
+# Окремий легкий workflow — лише перевіряє, чи працює зв'язок з Telegram,
+# без повного сканування watchlist. Запускати вручну через "Run workflow".
+
+"on":
+  workflow_dispatch: {}
+
+jobs:
+  test-telegram:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout репозиторію
+        uses: actions/checkout@v4
+
+      - name: Встановити Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Показати вміст requirements.txt (діагностика)
+        run: cat requirements.txt
+
+      - name: Встановити залежності
+        run: pip install -r requirements.txt
+
+      - name: Перевірити, що PyYAML встановлено
+        run: python -c "import yaml; print('PyYAML OK, версія:', yaml.__version__)"
+
+      - name: Перевірити наявність секретів (без розкриття значень)
+        run: |
+          if [ -z "${{ secrets.TELEGRAM_BOT_TOKEN }}" ]; then
+            echo "::error::TELEGRAM_BOT_TOKEN НЕ заданий у Settings -> Secrets and variables -> Actions"
+          else
+            echo "TELEGRAM_BOT_TOKEN заданий (довжина: ${#TOKEN_CHECK} символів приховано)"
+          fi
+          if [ -z "${{ secrets.TELEGRAM_CHAT_ID }}" ]; then
+            echo "::error::TELEGRAM_CHAT_ID НЕ заданий у Settings -> Secrets and variables -> Actions"
+          else
+            echo "TELEGRAM_CHAT_ID заданий"
+          fi
+
+      - name: Надіслати тестове повідомлення
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python main.py --test-telegram
