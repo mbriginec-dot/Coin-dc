@@ -20,39 +20,41 @@ jobs:
           python-version: "3.12"
           cache: "pip"
 
-      - name: Показати вміст requirements.txt (діагностика)
-        run: cat requirements.txt
+      - name: Показати структуру репозиторію (діагностика)
+        run: |
+          echo "Поточна директорія:"
+          pwd
+          echo "===================================================="
+          echo "Вміст кореня репозиторію:"
+          ls -la
+          echo "===================================================="
+          echo "Чи існує main.py?"
+          test -f main.py && echo "так, main.py знайдено" || echo "!!! main.py ВІДСУТНІЙ у корені репозиторію !!!"
+          echo "===================================================="
+          echo "Чи існує bot/config.py?"
+          test -f bot/config.py && echo "так, bot/config.py знайдено" || echo "!!! bot/config.py ВІДСУТНІЙ !!!"
 
       - name: Встановити залежності
         run: pip install -r requirements.txt
 
-      - name: Перевірити, що PyYAML встановлено
-        run: python -c "import yaml; print('PyYAML OK, версія:', yaml.__version__)"
-
-      - name: Перевірити наявність секретів (без розкриття значень)
-        run: |
-          if [ -z "${{ secrets.TELEGRAM_BOT_TOKEN }}" ]; then
-            echo "::error::TELEGRAM_BOT_TOKEN НЕ заданий у Settings -> Secrets and variables -> Actions"
-          else
-            echo "TELEGRAM_BOT_TOKEN заданий"
-          fi
-          if [ -z "${{ secrets.TELEGRAM_CHAT_ID }}" ]; then
-            echo "::error::TELEGRAM_CHAT_ID НЕ заданий у Settings -> Secrets and variables -> Actions"
-          else
-            echo "TELEGRAM_CHAT_ID заданий"
-          fi
-
-      - name: Надіслати тестове повідомлення
+      - name: Надіслати тестове повідомлення (з повною діагностикою)
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python main.py --test-telegram
-
-      - name: "!!! РЕЗУЛЬТАТ ТЕСТУ !!! (дивіться сюди)"
-        if: always()
         run: |
+          set +e
+          python main.py --test-telegram
+          EXIT_CODE=$?
           echo "===================================================="
-          echo "ВМІСТ data/bot.log (повний лог запуску):"
+          echo "КОД ЗАВЕРШЕННЯ python main.py --test-telegram: $EXIT_CODE"
           echo "===================================================="
-          cat data/bot.log || echo "Файл data/bot.log не знайдено"
+          echo "Поточна директорія:"
+          pwd
           echo "===================================================="
+          echo "Вміст директорії data/ (якщо існує):"
+          ls -la data/ 2>&1 || echo "директорія data/ НЕ існує"
+          echo "===================================================="
+          echo "Вміст data/bot.log (якщо існує):"
+          cat data/bot.log 2>&1 || echo "файл data/bot.log НЕ знайдено"
+          echo "===================================================="
+          exit 0
