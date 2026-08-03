@@ -25,7 +25,7 @@
     },
     "73.3450": {
       "alerted": true,
-      "moved_away": false
+      "moved_away": true
     }
   },
   "XRP/USDC": {
@@ -62,7 +62,7 @@
     },
     "8.1345": {
       "alerted": true,
-      "moved_away": true
+      "moved_away": false
     }
   },
   "DOT/USDC": {},
