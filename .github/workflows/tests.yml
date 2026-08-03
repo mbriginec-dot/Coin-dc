@@ -1,13 +1,18 @@
-name: Тест Telegram (діагностика)
+name: Тести
 
-# Окремий легкий workflow — лише перевіряє, чи працює зв'язок з Telegram,
-# без повного сканування watchlist. Запускати вручну через "Run workflow".
+# Запускає весь тестовий набір (формули калькулятора, сила рівня/Value Area,
+# інтеграційний smoke-тест) при кожному push/PR у main — щоб випадкові зміни
+# в стратегіях не зламали формули, звірені з вашими документами.
 
 "on":
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch: {}
 
 jobs:
-  test-telegram:
+  test:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -20,30 +25,14 @@ jobs:
           python-version: "3.12"
           cache: "pip"
 
-      - name: Показати вміст requirements.txt (діагностика)
-        run: cat requirements.txt
-
       - name: Встановити залежності
         run: pip install -r requirements.txt
 
-      - name: Перевірити, що PyYAML встановлено
-        run: python -c "import yaml; print('PyYAML OK, версія:', yaml.__version__)"
+      - name: Юніт-тести — формули калькулятора (проти прикладів з .docx)
+        run: python tests/test_risk_calculator.py
 
-      - name: Перевірити наявність секретів (без розкриття значень)
-        run: |
-          if [ -z "${{ secrets.TELEGRAM_BOT_TOKEN }}" ]; then
-            echo "::error::TELEGRAM_BOT_TOKEN НЕ заданий у Settings -> Secrets and variables -> Actions"
-          else
-            echo "TELEGRAM_BOT_TOKEN заданий (довжина: ${#TOKEN_CHECK} символів приховано)"
-          fi
-          if [ -z "${{ secrets.TELEGRAM_CHAT_ID }}" ]; then
-            echo "::error::TELEGRAM_CHAT_ID НЕ заданий у Settings -> Secrets and variables -> Actions"
-          else
-            echo "TELEGRAM_CHAT_ID заданий"
-          fi
+      - name: Юніт-тести — сила рівня, Value Area, тижневі бари
+        run: python tests/test_levels_and_strength.py
 
-      - name: Надіслати тестове повідомлення
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python main.py --test-telegram
+      - name: Інтеграційний smoke-тест (весь конвеєр, без мережі)
+        run: python tests/test_engine_smoke.py
